@@ -21,7 +21,7 @@ class RandomDrawing extends JPanel {
         Random random = new Random();
 
         for (int i = 0; i < numShapes; i++) {
-            int shapeType = random.nextInt(6); // 0-5: 0-line, 1-circle, 2-rectangle, 3-triangle, 4-parabola, 5-trapezoid
+            int shapeType = random.nextInt(8); // 0-7: 0-линия, 1-круг, 2-прямоугольник, 3-треугольник, 4-парабола, 5-трапеция.
 
             int x = random.nextInt(width);
             int y = random.nextInt(height);
@@ -44,15 +44,18 @@ class RandomDrawing extends JPanel {
                     g.drawPolygon(xPoints, yPoints, 3);
                     break;
                 case 4:
-                    // Implement parabola drawing logic
+                    g.drawArc(x, y, size, size, 0, 180);
                     break;
                 case 5:
-                    // Implement trapezoid drawing logic
+                    int[] xPointsTrap = {x, x + size, x + size * 2, x - size};
+                    int[] yPointsTrap = {y, y, y + size, y + size};
+                    g.drawPolygon(xPointsTrap, yPointsTrap, 4);
                     break;
+
             }
         }
 
-        // Draw coordinate grid
+        // Координатная сетка
         g.setColor(Color.GRAY);
         for (int i = 0; i < width; i += 50) {
             g.drawLine(i, 0, i, height);
@@ -68,7 +71,7 @@ class RandomDrawing extends JPanel {
             frame.setSize(800, 600);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-            int numShapes = 10; // Указать количество базовых фигур
+            int numShapes = 10; // Количество базовых фигур
             int width = 800; // Ширина области координат
             int height = 600; // Высота области координат
 
